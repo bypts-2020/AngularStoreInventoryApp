@@ -1,0 +1,10 @@
+<mat-toolbar color="primary" class="">
+  <span>ASIA</span>
+  <span class="example-spacer"></span>
+  <button *ngFor="let menu of menus" mat-button class="example-icon" [routerLink]="menu.route">
+    <mat-icon>{{menu.icon}}</mat-icon> {{menu.name}}
+  </button>
+</mat-toolbar>
+<div class="main-layout ">
+  <router-outlet></router-outlet>
+</div>

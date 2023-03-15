@@ -1,0 +1,45 @@
+<h4 mat-dialog-title color="primary" align="center">Store Record</h4>
+<mat-dialog-content class="mat-typography">
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Select Products</mat-label>
+      <mat-select [(ngModel)]="data.productIds" (selectionChange)="onSelectChange()" multiple>
+        <mat-option *ngFor="let product of products" [value]="product.id">{{product.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+  <div>
+    <table align="left">
+      <tr align="left">
+        <th>Product Name</th>
+        <th>Cost</th>
+        <th>Available</th>
+        <th>Quantity</th>
+        <th>Total Cost</th>
+      </tr>
+      <tr align="left" *ngFor="let item of selectedProducts">
+        <td>
+          <button mat-button extended (click)="removeProduct(item.id, item.selectedQuantity || 0)">
+            <mat-icon aria-hidden="false" aria-label="delete" fontIcon="delete" size="20px">
+            </mat-icon>{{item.name}}
+          </button>
+        </td>
+        <td>{{item.cost}}</td>
+        <td>{{item.quantity}}</td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" [(ngModel)]="item.selectedQuantity" (input)="updateSelectedProducts(item.id, item.selectedQuantity || 0)" required>
+          </mat-form-field>
+        </td>
+        <td>$ {{item.totalCost | currency}}</td>
+      </tr>
+    </table>
+  </div>
+  <p align="center">
+    <b>Total Cost: {{total | currency}}</b>
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-button mat-dialog-close color="warn"><mat-icon>cancel</mat-icon> Cancel</button>
+  <button mat-button color="primary" (click)="saveReceipt(data)" cdkFocusInitial><mat-icon>save</mat-icon> Submit</button>
+</mat-dialog-actions>

@@ -1,1 +1,42 @@
-<p>product works!</p>
+
+<mat-card>
+  <mat-toolbar class="white-background">
+    <span>List of Products</span>
+    <span class="example-spacer"></span>
+    <button mat-stroked-button class="example-icon" color="primary" (click)="openDialog()">
+      <mat-icon>add</mat-icon> Create New Product
+    </button>
+  </mat-toolbar>
+</mat-card>
+
+<div class="store-pading"></div>
+
+<table mat-table [dataSource]="products" class="mat-elevation-z8 table">
+  <ng-container matColumnDef="Store Name">
+    <th mat-header-cell *matHeaderCellDef> Store Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.store.name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Cost">
+    <th mat-header-cell *matHeaderCellDef> Cost </th>
+    <td mat-cell *matCellDef="let element"> {{element.cost}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Quantity">
+    <th mat-header-cell *matHeaderCellDef> Quantity </th>
+    <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Action">
+    <th mat-header-cell *matHeaderCellDef> Action </th>
+    <td mat-cell *matCellDef="let element">
+      <mat-icon aria-hidden="false" aria-label="edit" fontIcon="edit" (click)="editProduct(element)" size="30px"></mat-icon>
+      <mat-icon aria-hidden="false" aria-label="delete" fontIcon="delete" (click)="deleteProduct(element.id)" size="30px"></mat-icon>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
